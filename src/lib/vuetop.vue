@@ -4,65 +4,50 @@
   </div>
 </template>
 <script>
-export default {
-  props: ['type','top','right','bottom','size','color','duration'],
-  data () {
-    return {
-      showIcon: false,
-      scrollTop: 0,
-      types: ['iconfont icon-v-totop-0','iconfont icon-v-totop-1','iconfont icon-v-totop-2','iconfont icon-v-totop-3','iconfont icon-v-totop-4','iconfont icon-v-totop-5','iconfont icon-v-totop-6','iconfont icon-v-totop-7','iconfont icon-v-totop-8','iconfont icon-v-totop-9','iconfont icon-v-totop-10','iconfont icon-v-totop-11','iconfont icon-v-totop-12','iconfont icon-v-totop-13','iconfont icon-v-totop-14','iconfont icon-v-totop-15'],
-      defaultType: 0,
-      defaultTop: 400,
-      defaultRight: 30,
-      defaultBottom: 30,
-      defaultSize: 24,
-      defaultColor: '#666',
-      defaultDuration: 300
-    }
-  },
-  beforeDestroy () {
-    window.removeEventListener("scroll",this.handelScroll, false)
-  },
-  mounted () {
-    this.type ? this.defaultType = this.type: '';
-    this.top ?  this.defaultTop = this.top: '';
-    this.right ? this.defaultRight = this.right: '';
-    this.bottom ? this.defaultBottom = this.bottom: '';
-    this.size ? this.defaultSize = this.size: '';
-    this.color ? this.defaultColor = this.color: '';
-    this.duration ? this.defaultDuration = this.duration: '';
-    window.addEventListener('scroll', this.handelScroll, false)
-  },
-  methods: {
-    handelScroll () {
-      this.scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
-      this.scrollTop > this.defaultTop ? this.showIcon = true : this.showIcon = false
-    },
-    goTop () {
-      window.requestAnimationFrame = (function(){
-        return  window.requestAnimationFrame       ||
-          window.webkitRequestAnimationFrame ||
-          window.mozRequestAnimationFrame    ||
-          function( callback ){
-            window.setTimeout(callback, 1000 / 60);
-          };
-      })();
-      var step =  this.scrollTop / (this.defaultDuration / ( 1000 / 60)) >> 0;
-      var self = this
-      function fn(){
-        if(self.scrollTop >= 0){
-          self.scrollTop -= step;
-          document.documentElement.scrollTop = document.body.scrollTop = self.scrollTop;
-          fn.rafTimer = requestAnimationFrame(fn);
-        }else{
-          document.body.scrollTop = 0;
-          cancelAnimationFrame(fn.rafTimer);
+  import { scrollIt } from './scrollIt'; // 引入动画过渡的实现
+  export default {
+    props: ['type','top','right','bottom','size','color','duration'],
+    data () {
+      return {
+        showIcon: false,
+        scrollTop: 0,
+        types: ['iconfont icon-v-totop-0','iconfont icon-v-totop-1','iconfont icon-v-totop-2','iconfont icon-v-totop-3','iconfont icon-v-totop-4','iconfont icon-v-totop-5','iconfont icon-v-totop-6','iconfont icon-v-totop-7','iconfont icon-v-totop-8','iconfont icon-v-totop-9','iconfont icon-v-totop-10','iconfont icon-v-totop-11','iconfont icon-v-totop-12','iconfont icon-v-totop-13','iconfont icon-v-totop-14','iconfont icon-v-totop-15'],
+        defaultType: 0,
+        defaultTop: 400,
+        defaultRight: 30,
+        defaultBottom: 30,
+        defaultSize: 50,
+        defaultColor: '#666',
+        defaultDuration: 1500,
+        transitionName: { // 过渡动画名称
+          type: String,
+          default: 'linear'
         }
       }
-      fn.rafTimer = requestAnimationFrame(fn)
+    },
+    beforeDestroy () {
+      window.removeEventListener("scroll",this.handelScroll, true)
+    },
+    mounted () {
+      this.type ? this.defaultType = this.type: this.defaultType ;
+      this.top ?  this.defaultTop = this.top: this.defaultTop ;
+      this.right ? this.defaultRight = this.right: this.defaultRight;
+      this.bottom ? this.defaultBottom = this.bottom: this.defaultBottom ;
+      this.size ? this.defaultSize = this.size: this.defaultSize ;
+      this.color ? this.defaultColor = this.color:this.defaultColor ;
+      this.duration ? this.defaultDuration = this.duration: this.defaultDuration ;
+      window.addEventListener('scroll', this.handelScroll, true)
+    },
+    methods: {
+      handelScroll () {
+        var scrollTop = document.getElementsByClassName('content-box')[0].scrollTop;
+        scrollTop > this.defaultTop ? this.showIcon = true : this.showIcon = false
+      },
+      goTop () {
+        scrollIt(0,this.defaultDuration, this.transitionName.default, this.handelScroll)
+      }
     }
   }
-}
 </script>
 <style>
 

@@ -6,8 +6,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'vue-totop.js',
-    library: 'vue-totop',
+    filename: 'vue-to-top.js',
+    library: 'vue-to-top',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },

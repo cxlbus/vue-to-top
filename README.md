@@ -1,22 +1,20 @@
-# vue-totop
-![markdown](http://file.gcx365.com:8090/group1/M00/00/A2/d1ozqVvyUPCAWam4AAAQsow7OYo872.png "markdown")
->vue 点击返回顶部插件，可以根据参数设定按钮大小，颜色，类型，返回顶部的时间等。
+# vue-to-top
 
 ![markdown](http://file.gcx365.com:8090/group1/M00/00/A3/d1ozqVv1CwOAWuMiAAAvxIhhUak127.jpg "markdown")
 # 安装
-> `npm install vue-totop -S`
+> `npm install vue-to-top -S`
 
 # 使用
 **注入**
 > // ES6</br>
-`import vueToTop from 'vue-totop'`</br>
+`import vuetotop from 'vue-to-top'`</br>
 > //or require</br>
-`var vueToTop = require('vue-totop')`</br>
+`var vuetotop = require('vue-to-top')`</br>
 
-> `Vue.use(vueToTop)`
+> `Vue.use(vuetotop)`
 
 **组件使用**
-> `<vueToTop></vueToTop>`
+> `<vuetotop></vuetotop>`
 
 # 参数
 
