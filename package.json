@@ -1,11 +1,11 @@
 {
-  "name": "vue-to-top",
+  "name": "nuxt-to-top",
   "description": "vue 返回顶部插件",
   "version": "1.0.0",
   "author": "chen_xiao <729225669@qq.com>",
   "license": "MIT",
   "private": false,
-  "main": "dist/vue-totop.js",
+  "main": "dist/vue-to-top.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/cxlbus/vue-to-top"
